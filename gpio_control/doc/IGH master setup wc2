@@ -1,0 +1,63 @@
+s1ngap0re
+------------------------------
+
+to check which ethernet port is connected to slaves, remove all the other plugged ethernet connection and keep only the ethernet connection of slave and IPC and then run
+
+ip link show
+
+the slave port will be starting with e(i.e. eno1, eth0 etc.) and will have "state UP" as the output of the above command. 
+
+In wc2 the eno1 is the port
+
+2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 3c:ec:ef:47:de:b3 brd ff:ff:ff:ff:ff:ff
+    altname enp6s0
+
+-------------------------------
+
+sudo apt install git
+git clone https://gitlab.com/etherlab.org/ethercat.git
+cd ethercat
+git checkout stable-1.5
+./bootstrap
+./configure --prefix=/usr/local/etherlab  --disable-8139too --enable-generic
+make all modules
+sudo make modules_install install
+sudo depmod
+sudo ln -s /usr/local/etherlab/bin/ethercat /usr/bin/
+sudo ln -s /usr/local/etherlab/etc/init.d/ethercat /etc/init.d/ethercat
+sudo mkdir -p /etc/sysconfig
+sudo cp /usr/local/etherlab/etc/sysconfig/ethercat /etc/sysconfig/ethercat
+sudo -s
+sudo echo KERNEL==\"EtherCAT[0-9]*\", MODE=\"0664\", GROUP=\"ecusers\" > /etc/udev/rules.d/99-EtherCAT.rules
+exit
+
+get the master device mac address from ifconfig command, here is the output of ifconfig in wc2
+
+eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether 3c:ec:ef:47:de:b3  txqueuelen 1000  (Ethernet)
+        RX packets 59  bytes 10112 (10.1 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 827  bytes 148690 (148.6 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        
+sudo gedit /etc/sysconfig/ethercat
+MASTER0_DEVICE="3c:ec:ef:47:de:b3"
+DEVICE_MODULES="generic"
+
+sudo /etc/init.d/ethercat start
+
+it should print
+Starting EtherCAT master 1.5.2  done
+
+ethercat slaves
+
+it printed 
+0  2:0  PREOP  +  NX-ECC201 EtherCAT coupler V1.2
+
+follow this link
+
+https://github.com/ICube-Robotics/ethercat_driver_ros2/blob/main/INSTALL.md
+
+----------------
+

@@ -1,0 +1,61 @@
+inside /EC-Simulator-HiL-V3.1-Linux-x86_64Bit-Eval/Bin/Linux/x64
+
+sudo chmod 777 ./EcSimulatorHilDemo
+
+keep EXI file in this folder only
+
+The command "lspci -v" shows which driver is assigned to which network card,
+
+ethernet driver will be something like
+
+01:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller (rev 15)
+.....
+Kernel driver in use: r8169
+
+here first you have to unbind this non realtime network driver(acontis ec simulator "Unbind from kernel driver")
+
+$ echo "<Instance-ID>" > /sys/bus/pci/drivers/<driver-name>/unbind
+Example:
+$ echo "0000:01:00.0" > /sys/bus/pci/drivers/r8169/unbind
+
+you can find this "0000:01:00.0" in $ ls /sys/bus/pci/drivers/r8169
+
+then install the realtime network driver atemsys
+
+go to /EC-Simulator-HiL-V3.1-Linux-x86_64Bit-Eval/Sources/LinkOsLayer/Linux/atemsys
+
+then
+$ make modules
+
+$ sudo insmod atemsys.ko
+
+then restart the system to take network changes into affect
+
+then in /EC-Simulator-HiL-V3.1-Linux-x86_64Bit-Eval/Bin/Linux/x64
+
+$ sudo ./EcSimulatorHilDemo -f acontis_hardware_simulation.xml -rtl8169 1 1 -perf
+
+you will get rtl8169 bcz in acontis ec simulator doc "Unload kernel driver" table shows that 
+for kernel r8169, Link Layer Name is emllRTL8169 so rtl8169
+if kernel is e1000e, Link Layer Name is emllI8254x so i8254x
+
+acontis ec simulator doc("Link Layer" page 47)
+
+if there were two same ethernet drivers in pc and you want to run ethercat through first one then 
+
+$ sudo ./EcSimulatorHilDemo -f acontis_hardware_simulation.xml -rtl8169 1 1 -perf
+
+if there were two same ethernet drivers in pc and you want to run ethercat through second one then 
+
+$ sudo ./EcSimulatorHilDemo -f acontis_hardware_simulation.xml -rtl8169 2 1 -perf
+
+we have to do
+
+sudo insmod atemsys.ko
+
+everytime we start pc to load this driver. 
+we can check if the atemsys is loading properly or not by running "dmesg" in terminal. It should show atemsys v1.4.17 loaded
+also lspci -v will show "Kernel driver in use: atemsys_pci" in "Ethernet controller" section
+
+aconstis ec simulator doc "Setting up and running EcSimulatorHilDemo"
+also refer 2.7.2 Command line parameters

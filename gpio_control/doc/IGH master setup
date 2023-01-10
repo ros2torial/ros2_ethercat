@@ -1,0 +1,48 @@
+follow this link
+
+https://github.com/ICube-Robotics/ethercat_driver_ros2/blob/main/INSTALL.md
+
+----------------
+
+in the above link 
+
+sudo cp /usr/local/etherlab/etc/sysconfig/ethercat /etc/sysconfig/ethercat
+
+will print error "cp: cannot create regular file '/etc/sysconfig/ethercat': No such file or directory"
+
+this will create problem so before running this command, run
+
+sudo mkdir -p /etc/sysconfig
+
+---------------
+
+also this command will also not work
+
+sudo echo KERNEL==\"EtherCAT[0-9]*\", MODE=\"0664\", GROUP=\"ecusers\" > /etc/udev/rules.d/99-EtherCAT.rules
+
+it will show error "bash: /etc/udev/rules.d/99-EtherCAT.rules: Permission denied"
+
+so before this command run 
+sudo su
+then 
+sudo echo KERNEL==\"EtherCAT[0-9]*\", MODE=\"0664\", GROUP=\"ecusers\" > /etc/udev/rules.d/99-EtherCAT.rules
+then 
+exit
+
+--------------------
+
+we will get the mac address of the network card by running ifconfig
+
+--------------------
+
+sudo lshw -C network
+
+to check network card info
+
+---------------------
+
+sudo dmesg -c
+
+to check ethercat kernel log message if some issue happens
+
+

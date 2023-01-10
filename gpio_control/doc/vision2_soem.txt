@@ -1,0 +1,56 @@
+sudo ./slaveinfo enxa0cec8dc70b6 -map
+SOEM (Simple Open EtherCAT Master)
+Slaveinfo
+Starting slaveinfo
+ec_init on enxa0cec8dc70b6 succeeded.
+2 slaves found and configured.
+Calculated workcounter 3
+
+Slave:1
+ Name:NX-ECC202
+ Output size: 16bits
+ Input size: 288bits
+ State: 4
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport:0
+ Activeports:1.1.0.0
+ Configured address: 1001
+ Man: 00000083 ID: 000000a6 Rev: 00010002
+ SM0 A:2800 L: 256 F:00010026 Type:1
+ SM1 A:2a00 L: 256 F:00010022 Type:2
+ SM2 A:1000 L:   2 F:00010064 Type:3
+ SM3 A:1c00 L:  36 F:00010020 Type:4
+ FMMU0 Ls:00000000 Ll:   2 Lsb:0 Leb:7 Ps:1000 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:00000002 Ll:  36 Lsb:0 Leb:7 Ps:1c00 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 256 rd: 256 MBX protocols : 04
+ CoE details: 21 FoE details: 00 EoE details: 00 SoE details: 00
+ Ebus current: 0[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+
+Slave:2
+ Name:FH-2050
+ Output size: 0bits
+ Input size: 0bits
+ State: 0
+ Delay: 680[ns]
+ Has DC: 1
+ DCParentport:1
+ Activeports:1.0.0.0
+ Configured address: 1002
+ Man: 00000083 ID: 000000fa Rev: 00010002
+ SM0 A:2000 L: 512 F:00010026 Type:1
+ SM1 A:2400 L: 512 F:00010022 Type:2
+ SM2 A:1000 L:   0 F:00000064 Type:3
+ SM3 A:1600 L:   0 F:00000022 Type:4
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 512 rd: 512 MBX protocols : 04
+ CoE details: 25 FoE details: 00 EoE details: 00 SoE details: 00
+ Ebus current: 0[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+End slaveinfo, close socket
+End program
+

@@ -1,0 +1,14 @@
+1. To add ESI files to EC Engineer -
+
+open file->ESI Manager->Add File or Add Folder
+
+
+2. To create EtherCAT simulator EXI file -
+ 
+Select EtherCAT Simulator Unit (HiL) in Add Master Unit of Start Page
+
+In Simulator Settings change the Cycle Time [us] to 4000
+
+Then on left side select Append Slaves in EC-Simulator
+
+Then after adding all the slaves click on Export EXI option in the top side

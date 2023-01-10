@@ -1,0 +1,6 @@
+ros2 desktop version
+
+sudo apt install ros-humble-ros2-control
+sudo apt install ros-humble-ros2-controllers
+sudo apt install python3-colcon-common-extensions
+sudo apt install ros-humble-xacro

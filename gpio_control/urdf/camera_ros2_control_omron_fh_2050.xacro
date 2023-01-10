@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="gpio">
+
+  <ros2_control name="camera_system" type="system">
+
+    <hardware>
+      <plugin>ethercat_driver/EthercatDriver</plugin>
+      <param name="master_id">0</param>
+      <param name="control_frequency">100</param>
+    </hardware>
+
+    <gpio name="gpio1">
+      <command_interface name="dig_input.0"/>
+      <command_interface name="dig_input.1"/>
+      <command_interface name="dig_input.2"/>
+      <command_interface name="dig_input.3"/>
+      <command_interface name="dig_input.4"/>
+
+      <state_interface name="dig_input.0"/>
+      <state_interface name="dig_input.1"/>
+      <state_interface name="dig_input.2"/>
+      <state_interface name="dig_input.3"/>
+      <state_interface name="dig_input.4"/>
+      
+      <ec_module name="Omron_FH_2050">
+        <plugin>ethercat_plugins/Omron_FH_2050</plugin>
+        <param name="alias">0</param>
+        <param name="position">0</param>
+        <param name="io.0">dig_input.0</param>
+        <param name="io.1">dig_input.1</param>
+        <param name="io.2">dig_input.2</param>
+        <param name="io.3">dig_input.3</param>
+        <param name="io.4">dig_input.4</param>
+      </ec_module>
+    </gpio>
+
+  </ros2_control>
+
+</robot>

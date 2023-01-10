@@ -1,0 +1,163 @@
+to get the vendor id and product id for line 
+Omron_NX_ECC202_CUSTOM() : EcSlave(0x00000083, 0x000000a6) {}
+
+in ethercat_interface::EcSlave to get the ethercat vendor id follow the below link
+
+https://www.ethercat.org/en/vendor_id_list.html
+
+----------------
+
+in ethercat_interface::EcSlave to get the ethercat product id you have to check the ESI file of the product
+
+it will be under the tag like "ProductCode"
+
+----------------
+
+ec_sync_info_t syncs_[5] = {
+      	{0, EC_DIR_OUTPUT, 0, NULL, EC_WD_DISABLE},
+        {1, EC_DIR_INPUT, 0, NULL, EC_WD_DISABLE},
+        {2, EC_DIR_OUTPUT, 1, pdos_ + 0, EC_WD_ENABLE},
+        {3, EC_DIR_INPUT, 1, pdos_ + 1, EC_WD_DISABLE},
+        {0xff}
+    };
+    
+to get the above value search the below type of line in coupler ESI file
+
+<Sm MinSize="256" MaxSize="256" DefaultSize="256" StartAddress="#x2800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
+        <Sm MinSize="256" MaxSize="256" DefaultSize="256" StartAddress="#x2A00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+        <Sm MinSize="0" MaxSize="1024" StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
+        <Sm MinSize="0" MaxSize="1024" StartAddress="#x1C00" ControlByte="#x00" Enable="1">Inputs</Sm>
+
+here {0, EC_DIR_OUTPUT, 0, NULL, EC_WD_DISABLE} represents first SM line which is SM0 so 0, it is MBoxOut so EC_DIR_OUTPUT, NULL and EC_WD_DISABLE.
+here {2, EC_DIR_OUTPUT, 1, pdos_ + 0, EC_WD_ENABLE} represents third SM line which is SM2 so 2, it is Output so 
+
+
+-------------------------
+
+ec_pdo_entry_info_t channels_[2] = {
+        {0x6002, 0x01, 16}, /* Input */
+        {0x7022, 0x01, 16}, /* Output */
+    };
+    
+to get the above value search the below type of line in coupler+IO module EXI file where Mandatory="1"   {EXI file is generated using EC Engineer}
+
+<TxPdo Fixed="1" Mandatory="1" Sm="3">
+          <Index>#x1a00</Index>
+          <Name>Module 1 (NX-ID5442).Input Data Set  1</Name>
+          <Entry>
+            <Index>#x6002</Index>
+            <SubIndex>1</SubIndex>
+            <BitLen>16</BitLen>
+            <Name>Input Bit 16 bits</Name>
+            <DataType>UINT</DataType>
+          </Entry>
+        </TxPdo>
+        <RxPdo Fixed="1" Mandatory="1" Sm="2">
+          <Index>#x1604</Index>
+          <Name>Module 2 (NX-OD5256).Output Data Set 1</Name>
+          <Entry>
+            <Index>#x7022</Index>
+            <SubIndex>1</SubIndex>
+            <BitLen>16</BitLen>
+            <Name>Output Bit 16 bits</Name>
+            <DataType>UINT</DataType>
+          </Entry>
+         </RxPdo>
+          
+          
+-----------------------------------
+
+ec_pdo_info_t pdos_[2] = {
+        {0x1a00, 1, channels_ + 0}, /* Channel 1 */
+        {0x1604, 1, channels_ + 1}, /* Channel 2 */
+    };
+    
+to get the above value use the above section information
+
+----------------------
+
+DomainMap domains_ = {
+        {0, {0,1} }
+    };
+    
+here {0,1} represents which channels_ are we using to read and write
+
+------------------------
+
+ethercat config -v
+
+to check the slave detailed info like
+
+Alias: 0
+Position: 1
+Vendor Id: 0x00000083
+Product code: 0x00115442
+Attached slave: none
+Watchdog divider: (Default)
+Watchdog intervals: (Default)
+SM3, Dir: Input, Watchdog: Disable
+  PDO 0x1a00
+    PDO entry 0x6002:01, 16 bit
+    
+    
+-------------------------
+
+ethercat cstruct 
+
+to view these values
+
+/* Master 0, Slave 0, "NX-ECC202"
+ * Vendor ID:       0x00000083
+ * Product code:    0x000000a6
+ * Revision number: 0x00010002
+ */
+
+ec_pdo_info_t slave_0_pdos[] = {
+    {0x1601, 0, NULL},
+    {0x1a00, 0, NULL},
+};
+
+ec_sync_info_t slave_0_syncs[] = {
+    {0, EC_DIR_OUTPUT, 0, NULL, EC_WD_DISABLE},
+    {1, EC_DIR_INPUT, 0, NULL, EC_WD_DISABLE},
+    {2, EC_DIR_OUTPUT, 1, slave_0_pdos + 0, EC_WD_ENABLE},
+    {3, EC_DIR_INPUT, 1, slave_0_pdos + 1, EC_WD_DISABLE},
+    {0xff}
+};
+
+------------------------------
+
+ethercat domains -v
+
+to check if the PDO values directly from slave. to check if the ethercat controller code is working properly or not 
+output will be like this
+
+Domain0: LogBaseAddr 0x00000000, Size   4, WorkingCounter 0/3
+  SlaveConfig 0:1, SM3 ( Input), LogAddr 0x00000000, Size 2
+    00 00 
+  SlaveConfig 0:2, SM2 (Output), LogAddr 0x00000002, Size 2
+    00 c0
+    
+    
+---------------------------------
+
+to set the ethercat device to different state
+
+sudo ethercat state -p0 INIT
+sudo ethercat state -p0 PREOP
+
+check whether it is set properly or not using 
+
+sudo dmesg
+
+---------------------------------
+
+to read and write into sdo 
+
+ethercat download -h
+
+ethercat upload -h
+    
+------------------------------------
+----------------------------
+       

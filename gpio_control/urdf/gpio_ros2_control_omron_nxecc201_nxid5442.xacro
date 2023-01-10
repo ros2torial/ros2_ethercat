@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="gpio">
+
+  <ros2_control name="gpio_system" type="system">
+
+    <hardware>
+      <plugin>ethercat_driver/EthercatDriver</plugin>
+      <param name="master_id">0</param>
+      <param name="control_frequency">100</param>
+    </hardware>
+
+    <gpio name="gpio1">
+      <command_interface name="dig_input.1"/>
+      <command_interface name="dig_input.2"/>
+      <command_interface name="dig_input.3"/>
+      <command_interface name="dig_input.4"/>
+      <command_interface name="dig_input.5"/>
+      <command_interface name="dig_input.6"/>
+      <command_interface name="dig_input.7"/>
+      <command_interface name="dig_input.8"/>
+      <command_interface name="dig_input.9"/>
+      <command_interface name="dig_input.10"/>
+      <command_interface name="dig_input.11"/>
+      <command_interface name="dig_input.12"/>
+      <command_interface name="dig_input.13"/>
+      <command_interface name="dig_input.14"/>
+      <command_interface name="dig_input.15"/>
+      <command_interface name="dig_input.16"/>
+
+      <state_interface name="dig_input.1"/>
+      <state_interface name="dig_input.2"/>
+      <state_interface name="dig_input.3"/>
+      <state_interface name="dig_input.4"/>
+      <state_interface name="dig_input.5"/>
+      <state_interface name="dig_input.6"/>
+      <state_interface name="dig_input.7"/>
+      <state_interface name="dig_input.8"/>
+      <state_interface name="dig_input.9"/>
+      <state_interface name="dig_input.10"/>
+      <state_interface name="dig_input.11"/>
+      <state_interface name="dig_input.12"/>
+      <state_interface name="dig_input.13"/>
+      <state_interface name="dig_input.14"/>
+      <state_interface name="dig_input.15"/>
+      <state_interface name="dig_input.16"/>
+
+      <ec_module name="NX_ID5442">
+        <plugin>ethercat_plugins/Omron_NX_ECC201_NX_ID5442</plugin>
+        <param name="alias">0</param>
+        <param name="position">0</param>
+        <param name="di.1">dig_input.1</param>
+        <param name="di.2">dig_input.2</param>
+        <param name="di.3">dig_input.3</param>
+        <param name="di.4">dig_input.4</param>
+        <param name="di.5">dig_input.5</param>
+        <param name="di.6">dig_input.6</param>
+        <param name="di.7">dig_input.7</param>
+        <param name="di.8">dig_input.8</param>
+        <param name="di.9">dig_input.9</param>
+        <param name="di.10">dig_input.10</param>
+        <param name="di.11">dig_input.11</param>
+        <param name="di.12">dig_input.12</param>
+        <param name="di.13">dig_input.13</param>
+        <param name="di.14">dig_input.14</param>
+        <param name="di.15">dig_input.15</param>
+        <param name="di.16">dig_input.16</param>
+      </ec_module>
+    </gpio>
+
+  </ros2_control>
+
+</robot>

@@ -1,0 +1,47 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    gpio_command_controller:
+      type: gpio_controllers/GpioCommandController
+
+gpio_command_controller:
+  ros__parameters:
+    gpios:
+      - gpio2
+    state_interfaces:
+      gpio2:
+        - dig_output.1
+        - dig_output.2
+        - dig_output.3
+        - dig_output.4
+        - dig_output.5
+        - dig_output.6
+        - dig_output.7
+        - dig_output.8
+        - dig_output.9
+        - dig_output.10
+        - dig_output.11
+        - dig_output.12
+        - dig_output.13
+        - dig_output.14
+        - dig_output.15
+        - dig_output.16
+    command_interfaces:
+      gpio2:
+        - dig_output.1
+        - dig_output.2
+        - dig_output.3
+        - dig_output.4
+        - dig_output.5
+        - dig_output.6
+        - dig_output.7
+        - dig_output.8
+        - dig_output.9
+        - dig_output.10
+        - dig_output.11
+        - dig_output.12
+        - dig_output.13
+        - dig_output.14
+        - dig_output.15
+        - dig_output.16

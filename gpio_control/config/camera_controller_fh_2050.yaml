@@ -1,0 +1,25 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    gpio_command_controller:
+      type: gpio_controllers/GpioCommandController
+
+gpio_command_controller:
+  ros__parameters:
+    gpios:
+      - gpio1
+    state_interfaces:
+      gpio1:
+        - dig_input.0
+        - dig_input.1
+        - dig_input.2
+        - dig_input.3
+        - dig_input.4
+    command_interfaces:
+      gpio1:
+        - dig_input.0
+        - dig_input.1
+        - dig_input.2
+        - dig_input.3
+        - dig_input.4
