@@ -6,10 +6,7 @@ The proposed development builds upon the [IgH EtherCAT Master](https://etherlab.
 $ git clone https://gitlab.com/etherlab.org/ethercat.git
 $ cd ethercat
 $ git checkout stable-1.5
-```
-```shell
 $ ./bootstrap # to create the configure script, if downloaded from the repository
-
 $ ./configure --prefix=/usr/local/etherlab  --disable-8139too --enable-generic # Ethernet driver e1000e not supported for kernels 4.X
 $ make all modules
 $ sudo make modules_install install
@@ -32,7 +29,7 @@ inet6 fe80::7b5d:8210:946:6269/64 scope link noprefixroute
 
 we can verify it by running ```ifconfig``` that this ethernet interface won't show ipv4
 
-then go to **Setting->Network** and click on the Setting of the EtherCAT interface and select Link-Local Only in IPv4 and IPv6 section.
+then go to **Setting->Network** and click on the Setting of the EtherCAT interface and select **Link-Local Only** in IPv4 and IPv6 section.
 
 In the configuration file specify the mac address of the network card which you want to use as a ethercat master. We can get the mac address by running ```ifconfig```
 
