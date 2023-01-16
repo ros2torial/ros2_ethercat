@@ -3,11 +3,17 @@
 
 The proposed development builds upon the [IgH EtherCAT Master](https://etherlab.org/en/ethercat/). Installation steps are summarized here:
 ```shell
+$ sudo apt-get update
+$ sudo apt-get upgrade
 $ git clone https://gitlab.com/etherlab.org/ethercat.git
 $ cd ethercat
 $ git checkout stable-1.5
-$ ./bootstrap # to create the configure script, if downloaded from the repository
-$ ./configure --prefix=/usr/local/etherlab  --disable-8139too --enable-generic # Ethernet driver e1000e not supported for kernels 4.X
+$ sudo apt-get install autoconf
+$ sudo apt-get install libtool
+$ sudo rm /usr/bin/ethercat
+$ sudo rm /etc/init.d/ethercat
+$ ./bootstrap 
+$ ./configure --prefix=/usr/local/etherlab  --disable-8139too --enable-generic
 $ make all modules
 $ sudo make modules_install install
 $ sudo depmod
@@ -26,6 +32,8 @@ If the new EtherCAT interface didn't glow then we can use ```ip address``` comma
 inet6 fe80::7b5d:8210:946:6269/64 scope link noprefixroute 
        valid_lft forever preferred_lft forever 
 ```
+
+or we can get LOWER_UP in the connected interface by running ```ip address``` command after connecting the EtherCAT cable.
 
 we can verify it by running ```ifconfig``` that this ethernet interface won't show ipv4
 
