@@ -1,6 +1,12 @@
+sudo apt-get update
+sudo apt-get upgrade
 git clone https://gitlab.com/etherlab.org/ethercat.git
 cd ethercat
 git checkout stable-1.5
+sudo apt-get install autoconf
+sudo apt-get install libtool
+sudo rm /usr/bin/ethercat
+sudo rm /etc/init.d/ethercat
 ./bootstrap 
 ./configure --prefix=/usr/local/etherlab  --disable-8139too --enable-generic 
 make all modules
