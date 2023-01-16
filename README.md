@@ -7,8 +7,8 @@ to start IgH EtherCAT Master run
 
 ```shell
 sudo /etc/init.d/ethercat start
-ethercat slaves
 sudo chmod 777 /dev/EtherCAT0
+ethercat slaves
 ```
 
 or directly run the *ethercat_start.sh* file in the gpio_control which automatically run the above three commands
