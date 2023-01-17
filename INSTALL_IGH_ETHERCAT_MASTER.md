@@ -37,7 +37,12 @@ inet6 fe80::7b5d:8210:946:6269/64 scope link noprefixroute
 
 or we can get LOWER_UP in the connected interface by running ```ip address``` command after connecting the EtherCAT cable.
 
-we can verify it by running ```ifconfig``` that this ethernet interface won't show ipv4
+```shell
+<NO-CARRIER,BROADCAST,MULTICAST,UP>  #before
+<BROADCAST,MULTICAST,UP,LOWER_UP>    #after
+```
+
+Also by running ```ifconfig``` this ethernet interface won't show ipv4
 
 then go to **Setting->Network** and click on the Setting of the EtherCAT interface and select **Link-Local Only** in IPv4 and IPv6 section.
 
