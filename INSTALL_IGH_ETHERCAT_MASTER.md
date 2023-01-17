@@ -35,7 +35,7 @@ inet6 fe80::7b5d:8210:946:6269/64 scope link noprefixroute
        valid_lft forever preferred_lft forever 
 ```
 
-or we can get LOWER_UP in the connected interface by running ```ip address``` command after connecting the EtherCAT cable.
+or the EtherCAT interface will show LOWER_UP by running ```ip address``` command after connecting the EtherCAT cable.
 
 ```shell
 <NO-CARRIER,BROADCAST,MULTICAST,UP>  #before
@@ -78,3 +78,5 @@ it should printed info like this
 ```shell
 0  2:0  PREOP  +  NX-ECC201 EtherCAT coupler V1.2
 ```
+
+If installation is successful and the ethercat slaves aren't detected by running ```ethercat slaves``` command then try connecting EtherCAT cable to different port if available and change mac address in ```/etc/sysconfig/ethercat``` file
