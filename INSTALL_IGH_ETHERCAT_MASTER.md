@@ -14,6 +14,7 @@ $ sudo apt-get install libtool
 $ sudo apt-get install pkg-config
 $ sudo apt-get install make
 $ sudo apt-get install build-essential
+$ sudo apt-get install net-tools
 $ sudo rm /usr/bin/ethercat
 $ sudo rm /etc/init.d/ethercat
 $ ./bootstrap 
