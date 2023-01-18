@@ -11,6 +11,7 @@ $ cd ethercat
 $ git checkout stable-1.5
 $ sudo apt-get install autoconf
 $ sudo apt-get install libtool
+$ sudo apt-get install pkg-config
 $ sudo rm /usr/bin/ethercat
 $ sudo rm /etc/init.d/ethercat
 $ ./bootstrap 
