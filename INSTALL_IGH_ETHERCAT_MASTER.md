@@ -12,6 +12,8 @@ $ git checkout stable-1.5
 $ sudo apt-get install autoconf
 $ sudo apt-get install libtool
 $ sudo apt-get install pkg-config
+$ sudo apt-get install make
+$ sudo apt-get install build-essential
 $ sudo rm /usr/bin/ethercat
 $ sudo rm /etc/init.d/ethercat
 $ ./bootstrap 
