@@ -66,7 +66,7 @@ Now you can start the EtherCAT master:
 ```shell
 $ sudo /etc/init.d/ethercat start
 ```
-it should print
+It should print
 ```shell
 Starting EtherCAT master 1.5.2  done
 ```
@@ -79,7 +79,7 @@ Now check the slaves connected to the EtherCAT master
 $ ethercat slaves
 ```
 
-it should printed info like this
+It should print information of connected slave device. Example,
 ```shell
 0  2:0  PREOP  +  NX-ECC201 EtherCAT coupler V1.2
 ```
