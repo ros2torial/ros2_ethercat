@@ -21,7 +21,7 @@ ros2 launch gpio_control wc2_launch.py
 ```
 or 
 ```shell
-ros2 launch gpio_control wc2_launch.py
+ros2 launch gpio_control wc3_launch.py
 ```
 
 ### To Control Output
