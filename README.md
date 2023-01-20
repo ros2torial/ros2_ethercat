@@ -23,6 +23,7 @@ or
 ```shell
 ros2 launch gpio_control wc3_launch.py
 ```
+If this launch terminal is killed by the user then the outputs which were **HIGH** will automatically become **LOW**.
 
 ### To Control Output
 
