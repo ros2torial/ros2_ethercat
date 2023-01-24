@@ -5,16 +5,10 @@ The proposed development builds upon the [IgH EtherCAT Master](https://etherlab.
 ```shell
 $ sudo apt-get update
 $ sudo apt-get upgrade
-$ sudo apt install git
+$ sudo apt-get install git autoconf libtool pkg-config make build-essential net-tools
 $ git clone https://gitlab.com/etherlab.org/ethercat.git
 $ cd ethercat
 $ git checkout stable-1.5
-$ sudo apt-get install autoconf
-$ sudo apt-get install libtool
-$ sudo apt-get install pkg-config
-$ sudo apt-get install make
-$ sudo apt-get install build-essential
-$ sudo apt-get install net-tools
 $ sudo rm /usr/bin/ethercat
 $ sudo rm /etc/init.d/ethercat
 $ ./bootstrap 
